@@ -36,7 +36,7 @@ RUN apt-get -y install --no-install-recommends \
     
 RUN wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
 RUN tar zxvf google-cloud-sdk.tar.gz && ./google-cloud-sdk/install.sh --usage-reporting=false --path-update=true
-RUN PATH="google-cloud-sdk/bin:${PATH}"    
+ENV PATH "$PATH:google-cloud-sdk/bin"
 
 ADD https://dl.google.com/android/repository/sdk-tools-linux-${VERSION_SDK_TOOLS}.zip /tools.zip
 RUN unzip /tools.zip -d /sdk && rm -rf /tools.zip
