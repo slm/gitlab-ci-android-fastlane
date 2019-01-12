@@ -18,6 +18,12 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ENV HOME "/root"
 
+ENV CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+# Add the Cloud SDK distribution URI as a package source
+RUN echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+# Import the Google Cloud Platform public key
+RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
 RUN apt-add-repository ppa:brightbox/ruby-ng
 RUN apt-get update
 RUN apt-get -y install --no-install-recommends \
@@ -32,12 +38,9 @@ RUN apt-get -y install --no-install-recommends \
     file \
     ssh \
     wget \
-    tar
+    tar \
+    google-cloud-sdk
     
-RUN wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
-RUN tar zxvf google-cloud-sdk.tar.gz && ./google-cloud-sdk/install.sh --usage-reporting=false --path-update=false
-ENV PATH "$PATH:google-cloud-sdk/bin"
-
 ADD https://dl.google.com/android/repository/sdk-tools-linux-${VERSION_SDK_TOOLS}.zip /tools.zip
 RUN unzip /tools.zip -d /sdk && rm -rf /tools.zip
 
