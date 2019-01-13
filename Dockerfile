@@ -17,8 +17,8 @@ ENV PATH "$PATH:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/
 ENV DEBIAN_FRONTEND noninteractive
 
 ENV HOME "/root"
-
-ENV CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+ARG LSB_RELEASE = lsb_release -c -s
+ENV CLOUD_SDK_REPO="cloud-sdk-$LSB_RELEASE"
 # Add the Cloud SDK distribution URI as a package source
 RUN echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 
