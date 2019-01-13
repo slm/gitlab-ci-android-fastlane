@@ -40,10 +40,9 @@ RUN apt-get -y install --no-install-recommends \
     gcc \
     python \
     python-dev \
-    python-setuptools
-    
-RUN pip uninstall crcmod
-RUN pip install -U crcmod
+    python-setuptools \
+    python-crcmod
+
     
 ADD https://dl.google.com/android/repository/sdk-tools-linux-${VERSION_SDK_TOOLS}.zip /tools.zip
 RUN unzip /tools.zip -d /sdk && rm -rf /tools.zip
