@@ -38,6 +38,7 @@ RUN apt-get -y install --no-install-recommends \
     tar \
     google-cloud-sdk \
     gcc \
+    python \
     python-dev \
     python-setuptools
     
